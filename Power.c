@@ -2,22 +2,23 @@
 
 double Exponent(int x)
 {
-double sum= 1;
-while(x>0)
-{
-sum = sum*exp;
-x--;
-}
-return sum;
+	double sum= 1;
+	while(x>0)
+	{
+		sum *= exp;
+		--x;
+	}
+	return sum;
 }
 
 double Power(double x,int y)
 {
-double sum =1;
+	double sum =1;
 
-while(y >0)
-{
-sum+= sum*x; 
-y--;
-}
+	while(y >0)
+	{
+		sum*=x; 
+		--y;
+	}
+	return sum;
 }
