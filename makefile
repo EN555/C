@@ -11,10 +11,10 @@ mains: main.o libmyMath.a
 maind: main.o libmyMath.so
 	 $(CC) $(FLAGS) $^ -o $@
 
-libmyMath.a: ${LIBOBJECTS}
+libmyMath.a: $(LIBOBJECTS)
 	$(ar) $(FLAGS) rcs libmyMath.a -o $(LIBOBJECTS)   	
 
-libmyMath.so: ${LIBOBJECTS} 
+libmyMath.so: $(LIBOBJECTS) 
 	$(CC) $(FLAGS) -shared libmyMath.a -o $(LIBOBJECTS)
 
 main.o: main.c myMath.h
