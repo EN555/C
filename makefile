@@ -5,30 +5,30 @@ CC = gcc
 
 all: mains maind
 
-mains: main.o mymaths
-	$(CC) $(FLAGS) -o $@ $< libmyMath.a	
+mains: main.o libmyMath.a				#create main with static library
+	$(CC) $(FLAGS) main.o libmyMath.a -o mains	
 
-maind: main.o mymathd
-	 $(CC) $(FLAGS) -o $@  $< ./libmyMath.so
+maind: main.o libmyMath.so 				#create main with dinamy library
+	$(CC) $(FLAGS) main.o ./libmyMath.so -o maind    
 
 mymaths: libmyMath.a  	
 
 mymathd: libmyMath.so 
 
-libmyMath.a: $(LIBOBJECTS)
+libmyMath.a: $(LIBOBJECTS)				#create static library
 	$(AR) -rcs libmyMath.a $(LIBOBJECTS)   	
 
-libmyMath.so: $(LIBOBJECTS) 
-	$(CC) -shared -o libmyMath.so $(LIBOBJECTS)
+libmyMath.so: $(LIBOBJECTS) 						#create dinamy library
+	$(CC) $(FLAGS) -shared -o libmyMath.so $(LIBOBJECTS)
 
-main.o: main.c myMath.h
+main.o: main.c myMath.h					#create the main object 	
 	$(CC) $(FLAGS) -c $<
 
-power.o: power.c 
-	$(CC) $(FLAGS) -c power.c 
+power.o: power.c 					
+	$(CC) $(FLAGS) -fPIC -c power.c 
 
-basicMath.o: basicMath.c
-	$(CC) $(FLAGS) -c $^  
+basicMath.o: basicMath.c 
+	$(CC) $(FLAGS) -fPIC -c $^  
 
 .PHONY: clean all mymaths mymathd 
 
